@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => 'Kategoriename',
-            'image' => 'Kategorie icon',
+            'pic' => 'Kategorie icon',
         ];
     }
     public function messages()
