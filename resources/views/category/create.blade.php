@@ -3,9 +3,7 @@
 @section('content')
 
     <div class="panel">
-        <div class="header">
-            Neue Kategorie erstellen
-        </div>
+        <div class="header">Neue Kategorie erstellen</div>
         <div class="panel_content">
             {!! Form::open(['url' => 'admin/category','files'=>true]) !!}
             <div class="form-group">
@@ -22,10 +20,27 @@
             </div>
 
             <div class="form-group">
-                {{Form::label('search_url','url')}}
+                {{Form::label('search_url','search_url')}}
                 {{Form::text('search_url',null,['class'=>'form-control'])}}
                 @if($errors->has('search_url'))
                     <span class="has_error">{{$errors->first('search_url')}}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('parent_id','Kategorie Auswahl' ) }}
+                {{ Form::select('parent_id',$parent_cat,null,['class'=>'selectpicker auto_width','data-live-search'=>'true']) }}
+                @if($errors->has('parent_id'))
+                    <span class="has_error">{{$errors->first('parent_id')}}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <input type="file" name="pic" id="pic" onchange="loadFile(event)" style="display: none">
+                {{Form::label('pic','Foto ausw&auml;hlen')}}
+                <img src="{{url('files/images/upload_file.png')}}" onclick="select_file()" width="40" id="output">
+                @if($errors->has('pic'))
+                    <span class="has_error">{{$errors->first('pic')}}</span>
                 @endif
             </div>
             <div class="form-group">
