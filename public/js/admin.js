@@ -114,7 +114,7 @@ $('.check_box').click(function () {
     send_array_data = false;
     const $checkbox = $('table tr td input[type = "checkbox"]');
     const count = $checkbox.filter(':checked').length;
-    //alert(count);
+    // alert(count);
     if (count > 0) {
         $("#remove_items").removeClass('off');
         $("#restore_items").removeClass('off');
@@ -129,15 +129,16 @@ $('.item_form').click(function () {
     const count = $checkbox.filter(':checked').length;
     if (count > 0) {
         const href = window.location.href.split('?');
-        //console.log(href);
+       // console.log(href);
         let action = href [0] + "/" + this.id;
+        console.log(this.id);
         if (href.length == 2) {
             action = action + "?" + href[1];
         }
         $("#data_form").attr('action', action);
         $("#msg").text($(this).attr('msg'));
         $('.message_div').show();
-    }
+     }
 });
 $('span').tooltip();
 restore_row = function (url, t, message_text) {
