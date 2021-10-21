@@ -20,6 +20,8 @@ class CategoryRequest extends FormRequest
         ];
         if (empty($this->request->get('ename'))) {
             $array['search_url'] = 'required';
+        } else {
+            $array['ename'] = 'unique:category,ename,' . $this->category;
         }
         return $array;
     }
@@ -29,8 +31,10 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'Kategoriename',
             'pic' => 'Kategorie icon',
+            'ename' => 'Englisch Name',
         ];
     }
+
     public function messages()
     {
         return [

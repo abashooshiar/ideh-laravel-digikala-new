@@ -22,10 +22,10 @@ body {
 }
 
 @font-face {
-    font-family: 'IRANSansWeb';
-    src: url('../fonts/IRANSansWeb.eot') format("embedded-opentype"),
-    url('../fonts/IRANSansWeb.woff') format("woff"),
-    url('../fonts/IRANSansWeb.ttf') format("truetype");
+    /*font-family: 'IRANSansWeb';*/
+    /*src: url('../fonts/IRANSansWeb.eot') format("embedded-opentype"),*/
+    /*url('../fonts/IRANSansWeb.woff') format("woff"),*/
+    /*url('../fonts/IRANSansWeb.ttf') format("truetype");*/
     font-size: 15px;
 
 }
@@ -262,4 +262,73 @@ label {
 }
 .dropdown-menu .dropdown-item {
     padding: 5px;
+}
+.sidebar_menu_text {
+    margin-left: 10px;
+}
+.tooltip-inner {
+    background: #56d7ee;
+}
+/*.list-inline {*/
+/*    display: inline-flex;*/
+/*    margin-bottom: 0px;*/
+
+/*}*/
+
+.breadcrumb{
+    width:100%;
+    background:white !important;
+    padding:0px;
+    border:1px solid #f3f3f3;
+}
+.breadcrumb .list-inline{
+    margin-bottom:0px !important;
+    width:100%;
+    padding-left:10px;
+}
+.breadcrumb .list-inline li{
+    padding-top:10px;
+    padding-bottom:10px;
+    cursor:pointer;
+    font-size:13px;
+    display: inline-flex;
+}
+.breadcrumb .list-inline li a{
+    color:black !important;
+    text-decoration:none;
+}
+.breadcrumb .list-inline li a .fa-angle-right{
+    padding-right:5px;
+    padding-top:1px;
+    font-size:16px;
+    padding-left:5px;
+    float:right;
+}
+.breadcrumb  .fa-home{
+    padding-right:5px;
+}
+.date_li{
+    float:right;
+    background:#00bfd6;
+    color:white;
+    padding-right:12px;
+    padding-left:12px;
+    border-top-right-radius:0.25rem;
+    border-bottom-right-radius:0.25rem;
+}
+.date_li span{
+    padding-right: 2px;
+}
+.date_li .fa-calendar{
+    padding-top:3px;
+}
+.search_form {
+    padding-bottom: 10px;
+    display: flex;
+}
+.form-control{
+    height:39px;
+}
+.search_form .btn-primary{
+    font-size:14px !important;
 }

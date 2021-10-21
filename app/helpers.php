@@ -20,6 +20,7 @@ function upload_file($request, $name, $directory)
         return null;
     }
 }
+
 // change number to farsi (category/index.blade) // albate man estefade nakardam
 function replace_number($number)
 {
@@ -34,4 +35,28 @@ function replace_number($number)
     $number = str_replace("8", '8', $number);
     $number = str_replace("9", '9', $number);
     return $number;
+}
+
+function inTrashed($req)
+{
+    if (array_key_exists('trashed', $req) && $req['trashed'] == 'true') {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+function create_paginate_url($string, $text)
+{
+    if ($string == '?') {
+        $string = $string . $text;
+    }
+//    } else {
+//        var_dump('-',$string);
+//        var_dump($text);
+//        $string = $string . '&' . $text;
+//
+//    }
+    return $string;
 }

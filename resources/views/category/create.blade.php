@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-
+    @include('include.breadcrumb', ['data'=>[
+        ['title'=>'Kategorieverwaltung' , 'url'=>url('admin/category')],
+        ['title'=>'Kategorie hinzufügen' , 'url'=>url('admin/category/create')]
+        ]]);
     <div class="panel">
         <div class="header">Neue Kategorie erstellen</div>
         <div class="panel_content">
@@ -17,6 +20,9 @@
             <div class="form-group">
                 {{Form::label('ename','Englisch Name')}}
                 {{Form::text('ename',null,['class'=>'form-control'])}}
+                @if($errors->has('ename'))
+                    <span class="has_error">{{$errors->first('ename')}}</span>
+                @endif
             </div>
 
             <div class="form-group">

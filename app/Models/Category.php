@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use SoftDeletes;
+
     protected $table = 'category';
     protected $fillable = ['name', 'ename', 'parent_id', 'url', 'search_url', 'img', 'notShow'];
 
@@ -32,9 +33,48 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
+
     public function getParent()
     {
         return $this->hasOne(Category::class, 'id', 'parent_id')->withTrashed()->withDefault(['name' => '-']);
+    }
+
+    public static function getData($request)
+    {
+        $string = '?';
+        $category = self::with('getParent');
+        if (inTrashed($request)) {
+            $category = $category->onlyTrashed();
+            $string = create_paginate_url($string, 'trashed=true');
+        }
+        if (array_key_exists('string', $request) && !empty($request['string'])) {
+            $category = $category->where('name', 'like', '%' . $request['string'] . '%');
+            $category = $category->orWhere('ename', 'like', '%' . $request['string'] . '%');
+            $string = create_paginate_url($string, 'string=' . $request['string']);
+        }
+        $category = $category->orderBy('id', 'DESC')->paginate(6);
+        $category->withPath($string);
+        return $category;
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($category) {
+            foreach ($category->getChild()->withTrashed()->get() as $cat) {
+                if ($category->isForceDeleting()) {
+                    $cat->forceDelete();
+                } else {
+                    $cat->delete();
+                }
+            }
+        });
+        static::restoring(function ($category) {
+           // cache()->forget('catList');
+            foreach ($category->getChild()->withTrashed()->get() as $cat) {
+                $cat->restore();
+            }
+        });
     }
 }
 

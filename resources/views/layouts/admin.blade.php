@@ -257,13 +257,10 @@
 </div>
 <div class="message_div">
     <div class="message_box">
-
         <p id="msg"></p>
         <a class="alert alert-danger" onclick="delete_row()">Ja</a>
         <a class="alert alert-success" onclick="hide_box()">Nein</a>
-
     </div>
-
 </div>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/admin.js') }}" defer></script>

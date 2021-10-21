@@ -20,6 +20,10 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'index']);
     Route::resource('category', App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
+    Route::post('category/remove_items', [App\Http\Controllers\Admin\CategoryController::class, 'remove_items']);
+    Route::post('category/restore_items', [App\Http\Controllers\Admin\CategoryController::class, 'restore_items']);
+    Route::post('category/{category}', [App\Http\Controllers\Admin\CategoryController::class, 'restore']);
+
 });
 
 
