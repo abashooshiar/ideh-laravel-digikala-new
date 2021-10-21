@@ -7,21 +7,24 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends CustomController
 {
-    public function index()
+    protected $model = 'Category';
+    protected $title = 'Kategorie';
+    protected $route_params = 'category';
+
+    public function index(Request $request)
     {
-        $category = Category::with('getParent')->orderBy('id', 'DESC')->paginate(6);
-        return view('category.index', ['category' => $category]);
+        $category = Category::getData($request->all());
+        $trash_cat_count = Category::onlyTrashed()->count();
+        return view('category.index', ['category' => $category, 'trash_cat_count' => $trash_cat_count ,'req'=>$request]);
     }
+
 
     public function create()
     {
-
         $parent_cat = Category::get_parent();
-
         return view('category.create', ['parent_cat' => $parent_cat]);
-
     }
 
     public function store(CategoryRequest $request)
@@ -61,8 +64,5 @@ class CategoryController extends Controller
         return redirect('admin/category')->with('message', 'Kategoriebearbeitung erfolgreich abgeschlossen.');
     }
 
-    public function destroy()
-    {
 
-    }
 }
